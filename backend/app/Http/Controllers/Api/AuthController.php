@@ -40,14 +40,68 @@ class AuthController extends Controller
 
     public function me(Request $request): JsonResponse
     {
-        return response()->json(['data' => $this->userData($request->user())]);
+        return response()->json([
+            'data' => $this->userData($request->user()),
+        ]);
+    }
+
+    public function updateProfile(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'phone' => ['nullable', 'string', 'max:40'],
+            'postal_code' => ['nullable', 'string', 'max:20'],
+            'city' => ['nullable', 'string', 'max:100'],
+            'street_address' => ['nullable', 'string', 'max:150'],
+            'address_extra' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $user = $request->user();
+        $user->fill($validated);
+
+        $addressFields = [
+            'postal_code',
+            'city',
+            'street_address',
+            'address_extra',
+        ];
+
+        if (array_intersect($addressFields, array_keys($validated))) {
+            $locality = trim(
+                ($user->postal_code ?? '') . ' ' . ($user->city ?? '')
+            );
+
+            $addressParts = array_filter([
+                $locality,
+                $user->street_address,
+                $user->address_extra,
+            ], fn ($part) => $part !== null && trim($part) !== '');
+
+            $address = implode(', ', $addressParts);
+
+            if (mb_strlen($address) > 255) {
+                throw ValidationException::withMessages([
+                    'address' => ['A teljes szállítási cím legfeljebb 255 karakter lehet.'],
+                ]);
+            }
+
+            $user->address = $address !== '' ? $address : null;
+        }
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'A szállítási adatok sikeresen mentve.',
+            'data' => $this->userData($user),
+        ]);
     }
 
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()?->delete();
 
-        return response()->json(['message' => 'Sikeres kijelentkezés.']);
+        return response()->json([
+            'message' => 'Sikeres kijelentkezés.',
+        ]);
     }
 
     private function tokenResponse(User $user, string $deviceName, int $status = 200): JsonResponse
@@ -72,7 +126,12 @@ class AuthController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'role' => $user->role,
+            'phone' => $user->phone,
+            'address' => $user->address,
+            'postal_code' => $user->postal_code,
+            'city' => $user->city,
+            'street_address' => $user->street_address,
+            'address_extra' => $user->address_extra,
         ];
     }
 }
-

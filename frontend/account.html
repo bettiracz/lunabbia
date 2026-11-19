@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -28,12 +27,7 @@
       <span class="brand-tagline">rituali botanici</span>
     </a>
 
-    <button
-      class="nav-toggle"
-      aria-controls="main-nav"
-      aria-expanded="false"
-      aria-label="Menü megnyitása"
-    >☰</button>
+    <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Menü megnyitása">☰</button>
 
     <nav class="main-nav" id="main-nav" aria-label="Fő navigáció">
       <a href="index.html">Kezdőlap</a>
@@ -42,7 +36,7 @@
       <a href="index.html#contact">Kapcsolat</a>
       <a href="account.html" class="active">Fiókom</a>
     </nav>
-    
+
     <a href="cart.html" class="cart-link" aria-label="Kosár">
       <span>Kosár</span>
       <span class="cart-count" aria-live="polite">0</span>
@@ -53,7 +47,7 @@
     <section class="page-hero page-hero--small account-hero">
       <p class="eyebrow">A te LUNABBIA világod</p>
       <h1>Fiókom</h1>
-      <p>Jelentkezz be, és kövesd nyomon a rendeléseidet.</p>
+      <p>Kezeld személyes adataidat, és kövesd nyomon a rendeléseidet.</p>
     </section>
 
     <section class="section account-section">
@@ -153,6 +147,54 @@
           <h3>Profiladataim</h3>
           <p><strong>Név:</strong> <span id="account-name"></span></p>
           <p><strong>E-mail:</strong> <span id="account-email"></span></p>
+        </div>
+
+        <div class="account-shipping">
+          <h3>Szállítási adataim</h3>
+
+          <p class="form-intro">
+            Mentsd el szállítási adataidat, hogy a következő rendelésed még egyszerűbb legyen.
+          </p>
+
+          <form id="shipping-form" class="shipping-form">
+
+            <label class="form-field">
+              <span>Telefonszám</span>
+              <input type="tel" id="shipping-phone" name="phone" autocomplete="tel" maxlength="40" placeholder="+36 30 123 4567">
+            </label>
+
+            <div class="shipping-address-row">
+
+              <label class="form-field">
+                <span>Irányítószám</span>
+                <input type="text" id="shipping-postal-code" name="postal_code" autocomplete="shipping postal-code" maxlength="20" placeholder="1181">
+              </label>
+
+              <label class="form-field">
+                <span>Város</span>
+                <input type="text" id="shipping-city" name="city" autocomplete="shipping address-level2" maxlength="100" placeholder="Budapest">
+              </label>
+
+            </div>
+
+            <label class="form-field">
+              <span>Utca, házszám</span>
+              <input type="text" id="shipping-street-address" name="street_address" autocomplete="shipping address-line1" maxlength="150" placeholder="Minta utca 12.">
+            </label>
+
+            <label class="form-field">
+              <span>Emelet, ajtó (opcionális)</span>
+              <input type="text" id="shipping-address-extra" name="address_extra" autocomplete="shipping address-line2" maxlength="100" placeholder="2. emelet, 5. ajtó">
+            </label>
+
+            <button type="submit" id="shipping-save-button" class="button button--primary" disabled>
+              Adatok mentése
+            </button>
+
+            <p id="shipping-success" class="form-success" role="status" aria-live="polite"></p>
+            <p id="shipping-error" class="form-error" role="alert"></p>
+
+          </form>
         </div>
 
         <div class="account-orders">

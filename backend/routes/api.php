@@ -24,6 +24,7 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/me', [AuthController::class, 'me']);
+    Route::patch('/profile', [AuthController::class, 'updateProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/my-orders', [OrderController::class, 'mine']);
 

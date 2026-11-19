@@ -21,6 +21,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const pendingOrderStorageKey = "lunabbia_pending_order";
 
+  async function fillCustomerDetails() {
+    const token = localStorage.getItem("lunabbia_token");
+
+    if (!token) return;
+
+    try {
+      const result = await window.LunabbiaApi.request("/me");
+
+      if (localStorage.getItem("lunabbia_token") !== token) return;
+
+      const user = result.data;
+
+      if (!user) return;
+
+      const fields = {
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        address: user.address
+      };
+
+      Object.entries(fields).forEach(([name, value]) => {
+        const field = form.elements.namedItem(name);
+
+        if (field && !field.value.trim() && value) {
+          field.value = value;
+        }
+      });
+    } catch (error) {
+      console.warn("A vásárlói adatok betöltése nem sikerült.");
+    }
+  }
+
   async function getOrderIdempotencyKey(payload) {
     const serialized = JSON.stringify(payload);
     const bytes = new TextEncoder().encode(serialized);
@@ -310,6 +343,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     "click",
     () => dialog.close()
   );
+
+  fillCustomerDetails();
 
   try {
     products = await window.LunabbiaApi.getProducts();

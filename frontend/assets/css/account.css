@@ -1,4 +1,3 @@
-
 .account-hero {
   padding: 65px 24px 45px;
   min-height: 0;
@@ -9,6 +8,8 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 45px 24px 90px;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 .account-panel {
@@ -55,29 +56,51 @@
 .form-intro {
   margin-bottom: 26px;
   color: #716d65;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.7;
 }
 
-.account-form .form-field {
+.account-form .form-field,
+.shipping-form .form-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 20px;
 }
 
-.account-form input {
+.account-section .form-field span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #4f5946;
+}
+
+.account-form input,
+.shipping-form input,
+.shipping-form textarea {
+  box-sizing: border-box;
   width: 100%;
   padding: 13px 15px;
   border: 1px solid #d8d2c6;
   border-radius: 3px;
   background: #fff;
+  color: #303b2d;
   font: inherit;
+  font-size: 16px;
 }
 
-.account-form input:focus {
+.shipping-form textarea {
+  resize: vertical;
+}
+
+.account-form input:focus,
+.shipping-form input:focus,
+.shipping-form textarea:focus {
   border-color: #727b60;
   outline: 2px solid #727b6033;
+}
+
+.account-section .button {
+  font-size: 14px;
 }
 
 .account-form .button--wide {
@@ -94,10 +117,12 @@
 
 .account-guest p {
   margin-bottom: 10px;
+  font-size: 15px;
 }
 
 .account-guest a {
   color: #566448;
+  font-size: 15px;
 }
 
 .account-profile-heading {
@@ -109,6 +134,7 @@
 }
 
 .account-details,
+.account-shipping,
 .account-orders {
   margin-top: 30px;
   padding-top: 25px;
@@ -116,12 +142,48 @@
 }
 
 .account-details h3,
+.account-shipping h3,
 .account-orders h3 {
   margin-bottom: 20px;
+  font-size: 26px;
 }
 
 .account-details p {
   margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.shipping-form {
+  max-width: 620px;
+}
+
+.shipping-address-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 20px;
+}
+
+#shipping-save-button {
+  min-height: 44px;
+  padding: 12px 28px;
+  box-shadow: none;
+  text-shadow: none;
+  background-image: none;
+}
+
+#shipping-save-button::before,
+#shipping-save-button::after {
+  display: none;
+}
+
+#shipping-save-button:disabled {
+  background: #a0a596;
+  border-color: #a0a596;
+  color: #fff;
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .account-order {
@@ -130,6 +192,7 @@
   border: 1px solid #ded8cb;
   border-radius: 4px;
   background: #fff;
+  font-size: 15px;
 }
 
 .account-order-header {
@@ -141,21 +204,37 @@
 
 .account-order-meta {
   color: #716d65;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .account-order-items {
   margin: 15px 0;
   padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.8;
 }
 
 .account-order-total {
+  font-size: 16px;
   font-weight: 600;
 }
 
 .account-section .form-error {
   margin-top: 18px;
   color: #a13d3d;
+  font-size: 15px;
+}
+
+.account-section .form-success {
+  margin-top: 18px;
+  color: #566448;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.account-section .form-error:empty,
+.account-section .form-success:empty {
+  display: none;
 }
 
 @media (max-width: 640px) {
@@ -175,5 +254,14 @@
   .account-order-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .shipping-address-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #shipping-save-button {
+    width: 100%;
   }
 }
