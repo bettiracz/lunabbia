@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Order extends Model
+{
+    use HasFactory;
+
+    public const STATUSES = ['new', 'processing', 'shipped', 'completed', 'cancelled'];
+    public const PAYMENT_METHODS = ['cash_on_delivery'];
+
+    protected $fillable = [
+        'user_id',
+        'order_number',
+        'idempotency_key',
+        'customer_name',
+        'email',
+        'phone',
+        'address',
+        'message',
+        'payment_method',
+        'status',
+        'total',
+    ];
+
+    protected function casts(): array
+    {
+        return ['total' => 'integer'];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+}

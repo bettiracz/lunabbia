@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LUNABBIA vásárlói fiók, regisztráció és rendeléstörténet.">
+  <title>Fiókom | LUNABBIA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/account.css">
+</head>
+
+<body data-page="account">
+
+  <div class="announcement">
+    Kézzel készített · növényi alapú · szeretettel alkotva
+  </div>
+
+  <header class="site-header site-header--solid">
+    <a href="index.html" class="brand" aria-label="LUNABBIA főoldal">
+      <span class="brand-mark" aria-hidden="true">☾</span>
+      <span class="brand-name">LUNABBIA</span>
+      <span class="brand-tagline">rituali botanici</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      aria-controls="main-nav"
+      aria-expanded="false"
+      aria-label="Menü megnyitása"
+    >☰</button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Fő navigáció">
+      <a href="index.html">Kezdőlap</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#story">Történetünk</a>
+      <a href="index.html#contact">Kapcsolat</a>
+      <a href="account.html" class="active">Fiókom</a>
+    </nav>
+    
+    <a href="cart.html" class="cart-link" aria-label="Kosár">
+      <span>Kosár</span>
+      <span class="cart-count" aria-live="polite">0</span>
+    </a>
+  </header>
+
+  <main>
+    <section class="page-hero page-hero--small account-hero">
+      <p class="eyebrow">A te LUNABBIA világod</p>
+      <h1>Fiókom</h1>
+      <p>Jelentkezz be, és kövesd nyomon a rendeléseidet.</p>
+    </section>
+
+    <section class="section account-section">
+
+      <div id="auth-panel" class="account-panel" hidden>
+        <div class="account-tabs">
+          <button type="button" class="account-tab active" id="show-login">
+            Bejelentkezés
+          </button>
+          <button type="button" class="account-tab" id="show-register">
+            Regisztráció
+          </button>
+        </div>
+
+        <form id="login-form" class="account-form">
+          <h2>Üdvözlünk újra!</h2>
+          <p class="form-intro">
+            Jelentkezz be a LUNABBIA fiókodba.
+          </p>
+
+          <label class="form-field">
+            <span>E-mail-cím *</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+
+          <label class="form-field">
+            <span>Jelszó *</span>
+            <input type="password" name="password" autocomplete="current-password" required>
+          </label>
+
+          <button type="submit" class="button button--primary button--wide">
+            Bejelentkezés
+          </button>
+
+          <p class="form-error" id="login-error" role="alert"></p>
+        </form>
+
+        <form id="register-form" class="account-form" hidden>
+          <h2>Csatlakozz hozzánk!</h2>
+          <p class="form-intro">
+            Hozd létre saját fiókodat, és tekintsd meg rendeléseidet egy helyen.
+          </p>
+
+          <label class="form-field">
+            <span>Teljes név *</span>
+            <input type="text" name="name" autocomplete="name" maxlength="160" required>
+          </label>
+
+          <label class="form-field">
+            <span>E-mail-cím *</span>
+            <input type="email" name="email" autocomplete="email" maxlength="190" required>
+          </label>
+
+          <label class="form-field">
+            <span>Jelszó *</span>
+            <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+          </label>
+
+          <label class="form-field">
+            <span>Jelszó megerősítése *</span>
+            <input type="password" name="password_confirmation" autocomplete="new-password" minlength="8" required>
+          </label>
+
+          <p class="form-intro">
+            A jelszónak legalább 8 karakterből kell állnia,
+            és betűt, valamint számot is tartalmaznia kell.
+          </p>
+
+          <button type="submit" class="button button--primary button--wide">
+            Regisztráció
+          </button>
+
+          <p class="form-error" id="register-error" role="alert"></p>
+        </form>
+
+        <div class="account-guest">
+          <p>Nem szeretnél regisztrálni?</p>
+          <a href="cart.html" class="text-link">
+            Vásárlás vendégként <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <div id="profile-panel" class="account-panel" hidden>
+        <div class="account-profile-heading">
+          <div>
+            <p class="eyebrow">Személyes fiókod</p>
+            <h2 id="account-welcome">Üdvözlünk!</h2>
+          </div>
+
+          <button type="button" id="logout-button" class="button">
+            Kijelentkezés
+          </button>
+        </div>
+
+        <div class="account-details">
+          <h3>Profiladataim</h3>
+          <p><strong>Név:</strong> <span id="account-name"></span></p>
+          <p><strong>E-mail:</strong> <span id="account-email"></span></p>
+        </div>
+
+        <div class="account-orders">
+          <h3>Korábbi rendeléseim</h3>
+          <p class="form-intro">
+            Itt láthatod a fiókodhoz kapcsolódó rendeléseket.
+          </p>
+
+          <div id="account-orders-list"></div>
+
+          <p id="account-orders-empty" hidden>
+            Még nincs rendelésed.
+          </p>
+        </div>
+      </div>
+
+      <p class="form-error" id="account-error" role="alert"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer site-footer--compact">
+    <div class="footer-brand">
+      <span class="brand-name">LUNABBIA</span>
+      <p>Rituali per una vita più luminosa.</p>
+    </div>
+
+    <div>
+      <h3>Kapcsolat</h3>
+      <a href="mailto:hello@lunabbia.hu">hello@lunabbia.hu</a>
+    </div>
+
+    <p class="footer-bottom">
+      © 2026 LUNABBIA · Oktatási célú prototípus
+    </p>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/account.js"></script>
+</body>
+</html>

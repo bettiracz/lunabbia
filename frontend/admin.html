@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="hu">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   LUNABBIA – Adminisztráció
+  </title>
+  <link href="assets/css/admin.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <header>
+   <div class="brand">
+    LUNABBIA
+    <small>
+     ADMINISZTRÁCIÓ
+    </small>
+   </div>
+   <a href="index.html">
+    Webshop megnyitása
+   </a>
+  </header>
+  <main>
+   <section class="panel" hidden="" id="login-panel">
+    <h1>
+     Admin belépés
+    </h1>
+    <form id="login-form">
+     <label>
+      E-mail-cím
+      <input autocomplete="username" name="email" required="" type="email"/>
+     </label>
+     <label>
+      Jelszó
+      <input autocomplete="current-password" name="password" required="" type="password"/>
+     </label>
+     <button>
+      Belépés
+     </button>
+    </form>
+   </section>
+   <section hidden="" id="dashboard">
+    <div class="top">
+     <h1>
+      Webshop kezelése
+     </h1>
+     <button class="muted" id="logout">
+      Kijelentkezés
+     </button>
+    </div>
+    <nav class="tabs">
+     <button class="selected" data-tab="products">
+      Termékek
+     </button>
+     <button data-tab="categories">
+      Kategóriák
+     </button>
+     <button data-tab="orders">
+      Rendelések
+     </button>
+    </nav>
+    <div class="panel tab" id="products">
+     <div class="top">
+      <h2>
+       Termékek
+      </h2>
+      <button id="add-product">
+       Új termék
+      </button>
+     </div>
+     <div class="scroll">
+      <table>
+       <thead>
+        <tr>
+         <th>
+          Termék
+         </th>
+         <th>
+          Ár
+         </th>
+         <th>
+          Készlet
+         </th>
+         <th>
+          Aktív
+         </th>
+         <th>
+          Műveletek
+         </th>
+        </tr>
+       </thead>
+       <tbody id="products-body">
+       </tbody>
+      </table>
+     </div>
+     <div class="paging">
+      <button class="muted" id="prev-products">
+       Előző
+      </button>
+      <span id="page-info">
+      </span>
+      <button class="muted" id="next-products">
+       Következő
+      </button>
+     </div>
+     <form class="edit" hidden="" id="product-form">
+      <h3 id="product-form-title">
+       Termék
+      </h3>
+      <input name="id" type="hidden"/>
+      <div class="fields">
+       <label>
+        Név
+        <input maxlength="160" name="name" required=""/>
+       </label>
+       <label>
+        URL-azonosító (slug)
+        <input maxlength="180" name="slug" required=""/>
+       </label>
+       <label>
+        Kategória
+        <select name="category_id" required="">
+        </select>
+       </label>
+       <label>
+        Ár (Ft)
+        <input max="10000000" min="0" name="price" required="" type="number"/>
+       </label>
+       <label>
+        Készlet (db)
+        <input max="1000000" min="0" name="stock" required="" type="number"/>
+       </label>
+       <label>
+        Alcím
+        <input name="subtitle"/>
+       </label>
+       <label>
+        Termékkép URL
+        <input name="image_url"/>
+       </label>
+       <label>
+        Megjelenés témája
+        <input name="theme" required="" value="milk"/>
+       </label>
+       <label>
+        Szimbólum
+        <input maxlength="12" name="symbol" required="" value="☾"/>
+       </label>
+       <label>
+        Címke
+        <input name="badge"/>
+       </label>
+       <label class="wide">
+        Leírás
+        <textarea name="description" rows="3"></textarea>
+       </label>
+      </div>
+      <div class="checks">
+       <label>
+        <input checked="" name="active" type="checkbox"/>
+        Aktív
+       </label>
+       <label>
+        <input name="featured" type="checkbox"/>
+        Kiemelt
+       </label>
+      </div>
+      <div class="actions">
+       <button type="submit">
+        Mentés
+       </button>
+       <button class="muted" id="cancel-product" type="button">
+        Mégse
+       </button>
+      </div>
+     </form>
+    </div>
+    <div class="panel tab" hidden="" id="categories">
+     <div class="top">
+      <h2>
+       Kategóriák
+      </h2>
+      <button id="add-category">
+       Új kategória
+      </button>
+     </div>
+     <div class="scroll">
+      <table>
+       <thead>
+        <tr>
+         <th>
+          Név
+         </th>
+         <th>
+          Slug
+         </th>
+         <th>
+          Termékek
+         </th>
+         <th>
+          Műveletek
+         </th>
+        </tr>
+       </thead>
+       <tbody id="categories-body">
+       </tbody>
+      </table>
+     </div>
+     <form class="edit" hidden="" id="category-form">
+      <h3>
+       Kategória
+      </h3>
+      <input name="id" type="hidden"/>
+      <div class="fields">
+       <label>
+        Név
+        <input maxlength="100" name="name" required=""/>
+       </label>
+       <label>
+        Slug
+        <input maxlength="120" name="slug" required=""/>
+       </label>
+      </div>
+      <label>
+       <input checked="" name="active" type="checkbox"/>
+       Aktív
+      </label>
+      <div class="actions">
+       <button>
+        Mentés
+       </button>
+       <button class="muted" id="cancel-category" type="button">
+        Mégse
+       </button>
+      </div>
+     </form>
+    </div>
+    <div class="panel tab" hidden="" id="orders">
+     <h2>
+      Rendelések
+     </h2>
+     <div class="scroll">
+      <table>
+       <thead>
+        <tr>
+         <th>
+          Rendelés
+         </th>
+         <th>
+          Vásárló
+         </th>
+         <th>
+            Dátum
+        </th>
+         <th>
+          Összeg
+         </th>
+         <th>
+          Státusz
+         </th>
+         <th>
+          Módosítás
+         </th>
+        </tr>
+       </thead>
+       <tbody id="orders-body">
+       </tbody>
+      </table>
+     </div>
+     <div class="paging">
+      <button class="muted" id="prev-orders">
+       Előző
+      </button>
+      <span id="order-page-info">
+      </span>
+      <button class="muted" id="next-orders">
+       Következő
+      </button>
+     </div>
+    </div>
+   </section>
+   <p aria-live="polite" id="feedback" role="status">
+   </p>
+  </main>
+  <script defer="" src="assets/js/admin.js">
+  </script>
+ </body>
+</html>

@@ -1,0 +1,179 @@
+
+.account-hero {
+  padding: 65px 24px 45px;
+  min-height: 0;
+  text-align: center;
+}
+
+.account-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 45px 24px 90px;
+}
+
+.account-panel {
+  background: #faf8f3;
+  border: 1px solid #e5e0d5;
+  border-radius: 6px;
+  padding: 42px;
+}
+
+.account-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid #ded8cb;
+}
+
+.account-tab {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #635e55;
+  font: inherit;
+  cursor: pointer;
+}
+
+.account-tab.active {
+  border-bottom-color: #727b60;
+  color: #303b2d;
+  font-weight: 600;
+}
+
+.account-form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.account-form h2 {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.form-intro {
+  margin-bottom: 26px;
+  color: #716d65;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.account-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.account-form input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #d8d2c6;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+}
+
+.account-form input:focus {
+  border-color: #727b60;
+  outline: 2px solid #727b6033;
+}
+
+.account-form .button--wide {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.account-guest {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #ded8cb;
+  text-align: center;
+}
+
+.account-guest p {
+  margin-bottom: 10px;
+}
+
+.account-guest a {
+  color: #566448;
+}
+
+.account-profile-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.account-details,
+.account-orders {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #ded8cb;
+}
+
+.account-details h3,
+.account-orders h3 {
+  margin-bottom: 20px;
+}
+
+.account-details p {
+  margin-bottom: 10px;
+}
+
+.account-order {
+  margin-bottom: 18px;
+  padding: 22px;
+  border: 1px solid #ded8cb;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.account-order-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.account-order-meta {
+  color: #716d65;
+  font-size: 13px;
+}
+
+.account-order-items {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.account-order-total {
+  font-weight: 600;
+}
+
+.account-section .form-error {
+  margin-top: 18px;
+  color: #a13d3d;
+}
+
+@media (max-width: 640px) {
+  .account-hero {
+    padding: 42px 20px 28px;
+  }
+
+  .account-section {
+    padding: 28px 16px 60px;
+  }
+
+  .account-panel {
+    padding: 26px 18px;
+  }
+
+  .account-profile-heading,
+  .account-order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
